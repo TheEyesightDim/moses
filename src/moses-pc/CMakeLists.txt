@@ -3,12 +3,16 @@ project(moses-pc C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(MosES)
-target_sources(MosES
-    PRIVATE
-        main.c
+add_library(moses-client STATIC)
+
+target_include_directories(moses-client
+        PUBLIC ../../include
 )
-target_link_libraries(MosES
-    PRIVATE
-        MosesCore
+target_sources(moses-client
+        PRIVATE
+        debug.c
+)
+target_link_libraries(moses
+        PRIVATE
+        moses-client
 )

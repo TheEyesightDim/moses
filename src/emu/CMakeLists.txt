@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 4.0)
 project(moses-core C)
 
-add_library(MosesCore SHARED)
-target_include_directories(MosesCore PUBLIC ../../include)
-target_sources(MosesCore
-    PRIVATE
-        cpu.c
+add_executable(moses)
+target_include_directories(moses PUBLIC ../../include)
+target_sources(moses
+        PRIVATE
+        main.c
+)
+target_link_libraries(moses
+        PRIVATE
+        moses-client
 )
