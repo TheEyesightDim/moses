@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <moses/client.h>
+#include <SDL3/SDL_main.h>
+
+#include "SDL3/SDL_log.h"
 
 void moses_log(const char* str)
 {
-    printf("%s", str);
+    SDL_Log("%s", str);
 }
