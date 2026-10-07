@@ -1,10 +1,10 @@
 #include <moses/client.h>
 
 int main(void) {
-    moses_log("MOSES 0.0.0.0\n");
+    moses_log("MOSES %s\n", MOSES_VER);
     init_video();
     while (1) {
-        enum client_event event = get_client_event();
+        enum client_event event = poll_client_event();
         if (event == CLIENT_EXIT) {
             break;
         }

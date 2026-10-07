@@ -6,6 +6,7 @@ static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 
 void init_video() {
+    SDL_Log("Initializing SDL...");
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("moses", 256, 240, 0);
     if (window == NULL)

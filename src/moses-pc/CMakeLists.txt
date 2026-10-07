@@ -8,7 +8,7 @@ add_subdirectory(external/SDL EXCLUDE_FROM_ALL)
 
 target_include_directories(moses-client
         PUBLIC
-        ../../include
+        "${CMAKE_SOURCE_DIR}/include"
         ./external/SDL/include
 )
 target_sources(moses-client
