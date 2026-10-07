@@ -14,6 +14,8 @@ target_include_directories(moses-client
 target_sources(moses-client
         PRIVATE
         debug.c
+        video.c
+        events.c
 )
 target_link_libraries(moses
         PRIVATE
