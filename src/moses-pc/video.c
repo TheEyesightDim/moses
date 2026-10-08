@@ -6,12 +6,12 @@ static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 
 void init_video() {
-    SDL_Log("Initializing SDL...");
+    moses_log(CLIENT, INFO, "Initializing SDL...");
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("moses", 256, 240, 0);
     if (window == NULL)
     {
-        moses_log("SDL_CreateWindow failed! %s\n", SDL_GetError());
+        moses_log(CLIENT, CRITICAL, "SDL_CreateWindow failed! %s\n", SDL_GetError());
         SDL_Quit();
         exit(1);
     }
@@ -19,7 +19,7 @@ void init_video() {
     renderer = SDL_CreateRenderer(window, NULL);
     if (renderer == NULL)
     {
-        moses_log("SDL_CreateRenderer failed! %s\n", SDL_GetError());
+        moses_log(CLIENT, CRITICAL, "SDL_CreateRenderer failed! %s\n", SDL_GetError());
         SDL_DestroyWindow(window);
         SDL_Quit();
         exit(1);
@@ -27,8 +27,9 @@ void init_video() {
 }
 
 void exit_video() {
-    moses_log("Cleaning up SDL...");
+    moses_log(CLIENT, INFO, "Cleaning up SDL...");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+

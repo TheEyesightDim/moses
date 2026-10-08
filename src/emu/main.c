@@ -1,7 +1,7 @@
 #include <moses/client.h>
 
 int main(void) {
-    moses_log("MOSES %s\n", MOSES_VER);
+    moses_log(GENERAL, INFO, "MOSES %s\n", MOSES_VER);
     init_video();
     while (1) {
         enum client_event event = poll_client_event();
@@ -12,3 +12,4 @@ int main(void) {
     exit_video();
     return 0;
 }
+
