@@ -8,6 +8,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+
 /* Logging */
 void moses_log(const char* fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
@@ -18,9 +19,11 @@ void exit_video();
 /* Events */
 enum client_event
 {
-    CLIENT_NONE,
-    CLIENT_EXIT
+    EVENT_NONE,     // no events are available from the client, polling should stop
+    EVENT_EXIT,     // the client requested to exit
+    EVENT_CLIENT    // unspecified client event occurred and polling should continue
 };
 enum client_event poll_client_event();
+
 
 #endif

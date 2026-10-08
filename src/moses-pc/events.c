@@ -3,11 +3,13 @@
 
 enum client_event poll_client_event() {
     SDL_Event e;
-    SDL_PollEvent(&e);
+    if (!SDL_PollEvent(&e)) {
+        return EVENT_NONE;
+    }
 
     if (e.type == SDL_EVENT_QUIT)
     {
-        return CLIENT_EXIT;
+        return EVENT_EXIT;
     }
-    return CLIENT_NONE;
+    return EVENT_CLIENT;
 }

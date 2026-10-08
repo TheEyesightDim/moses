@@ -4,6 +4,8 @@
 void moses_log(const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
-    SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, fmt, ap);
+    printf("\033[31m[moses_log]\033[0m: ");
+    vprintf(fmt, ap);
+    putchar('\n');
     va_end(ap);
 }
