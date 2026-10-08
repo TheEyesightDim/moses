@@ -38,7 +38,7 @@ enum MosesLogCategory {
  */ 
 void moses_log(enum MosesLogCategory category,
                enum MosesLogLevel level,
-               const char* fmt, ...)
+               char const * fmt, ...)
 __attribute__ ((format (printf, 3, 4)));
 
 // Set a log level threshhold, below which log messages are ignored.

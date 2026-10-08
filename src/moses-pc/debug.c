@@ -5,7 +5,7 @@
 static enum MosesLogLevel threshold = INFO;
 static int log_categories = -1; // log all categories by default
 
-static char * const level_strs[] = {
+static char const * level_strs[] = {
     "TRACE",
     "VERBOSE",
     "INFO",
@@ -14,7 +14,7 @@ static char * const level_strs[] = {
     "CRITICAL"
 };
 
-static char * const category_strs[] = {
+static char const * category_strs[] = {
     "CPU",
     "APU",
     "PPU",
@@ -25,7 +25,7 @@ static char * const category_strs[] = {
 
 void moses_log(enum MosesLogCategory category,
                enum MosesLogLevel level,
-               const char *fmt, ...) {
+               char const * fmt, ...) {
     if (!(level >= threshold && log_categories & category))
         return;
     
