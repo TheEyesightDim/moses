@@ -1,5 +1,6 @@
 #include <moses/client.h>
-#include <SDL3/SDL_log.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 void moses_log(const char *fmt, ...) {
     va_list ap;

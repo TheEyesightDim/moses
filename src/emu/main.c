@@ -1,5 +1,4 @@
 #include <moses/client.h>
-#include <sys/poll.h>
 
 int main(void) {
     moses_log("MOSES %s", MOSES_VER);
