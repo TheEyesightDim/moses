@@ -2,8 +2,7 @@
  * Definitions of macros and other utilities (probably)
  */
 
-#ifndef MOSES_UTILS_H
-#define MOSES_UTILS_H
+#pragma once
 
 /*
  * Takes binary data and a bit number, then evaluates to
@@ -29,5 +28,3 @@
  * bit number.
  */
 #define EXT(data, bit, len) ((data >> bit) & ((0x1 << len) - 0x1))
-
-#endif //MOSES_UTILS_H

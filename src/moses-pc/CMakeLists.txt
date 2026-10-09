@@ -25,11 +25,11 @@ target_sources(moses-client
         PRIVATE
         debug.c
         video.c
-        events.c
+        client.c
 )
 target_link_libraries(moses-client
-    PRIVATE
-    SDL3::SDL3
+        PRIVATE
+        SDL3::SDL3
 )
 
 target_link_libraries(moses
