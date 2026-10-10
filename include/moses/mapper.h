@@ -11,25 +11,60 @@
 		- providing more RAM or save memory
 		- providing additional audio generation
 		- providing more advanced graphical capabilities
+		- generating interupts to the CPU
 		- whatever else you can think of 
-
-	The Mapper interface represents the device that the CPU is interacting with through its cartridge slot.
 */
 
+#include <stdint.h>
+#include <stdio.h>
+
 enum MapperID {
-	MAPPER_UNKNOWN = -1
+	MAPPER_NROM,
 };
 
-typedef struct Mapper {
-	// an opaque pointer to a specific mapper struct
-	void * mapper_resource_handle;
-	enum MapperID mapper_id;
-} Mapper;
+// This interface is highly subject to change, but at a minimum we need to
+// read and write bytes over the data bus in the cartridge's mapped region.
+// The mapper should also be able to reset its state (e.g. internal registers) and free any resources (e.g. handle to rom file).
 
-// Initializes a Mapper to a useable state
-void init_mapper(Mapper * mapper, enum MapperID mapper_id, ...);
-
+// Need to forward declare structs because they both refer to eachother
+typedef struct MapperVTable MapperVTable;
+typedef struct MapperBase MapperBase;
 
 
-// Clean up all resources used by a Mapper instance.
-void delete_mapper(Mapper * mapper);
+struct MapperVTable {
+	void (* write_byte) (MapperBase * mapper, uint16_t address, uint8_t byte);
+	uint8_t (* read_byte) (MapperBase * mapper, uint16_t address);
+	void (* reset) (MapperBase * mapper);
+	void (* delete) (MapperBase * mapper);
+};
+
+// Hold the method vtable and common properties of all mappers
+struct MapperBase {
+	MapperVTable const * vtable;
+};
+
+MapperBase * mapper_create_from_rom_filepath(FILE * filepath);
+
+void mapper_delete(MapperBase * mapper);
+
+/*
+An example derivation of MapperBase:
+
+	struct Mapper_01 {
+		MapperBase base;
+		void * mmapped_nes_rom;
+		enum CartFormat format;
+		uint8_t PRG_ROM_index;
+		uint8_t CHR_ROM_index;
+	};
+
+	//...
+
+	// detects the correct mapper from header, allocates and inits Mapper_01
+	MapperBase * cart = mapper_create_from_rom_filepath(filepath);
+
+	NES * nes = nes_create_system();
+
+	nes_attach_mapper(nes, cart);
+*/
+
