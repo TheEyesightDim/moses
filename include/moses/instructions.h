@@ -34,6 +34,7 @@ struct instr_01 {
     }mode;
 };
 
+/* similarly, a struct for 0x10 instructions */
 struct instr_02 {
     enum {
         ASL,
@@ -56,6 +57,7 @@ struct instr_02 {
     }mode;
 };
 
+/* struct for 0x00 instructions */
 struct instr_03 {
     enum {
         BIT = 1,
@@ -76,7 +78,17 @@ struct instr_03 {
     }mode;
 };
 
+/* struct for conditional instructions, which use status register data */
+struct instr_cond {
+    enum {
+        NEGATIVE,
+        OVERFLOW,
+        CARRY,
+        ZERO
+    }flag;
 
+    uint8_t bit;
+};
 
 /* Structure:
  * byte 1 = op-code/addressing mode
@@ -87,7 +99,5 @@ struct instr_03 {
  */
 
 void parse_instruction(uint8_t opcode);
-
-void ex_group01(struct instr_01);
 
 #endif //MOSES_COMMANDS_H
