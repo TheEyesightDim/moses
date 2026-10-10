@@ -1,5 +1,5 @@
 /*
- * Defines functions which will be used to perform 6502 commands
+* Defines functions which will be used to perform 6502 commands
  */
 
 
@@ -7,8 +7,8 @@
 #define MOSES_COMMANDS_H
 
 /*
- * This struc (instr_01) holds op codes & addressing modes for 0x01 instructions,
- * and can set the current op/mode using the enum members.
+ * this struc holds opcodes & addressing modes for group 1 instructions,
+ * and can set the current op/mode using enum members.
  */
 struct instr_01 {
     enum {
@@ -34,7 +34,7 @@ struct instr_01 {
     }mode;
 };
 
-/* similarly, a struct for 0x10 instructions */
+/* similarly, a struct for group 2 instructions */
 struct instr_02 {
     enum {
         ASL,
@@ -57,7 +57,7 @@ struct instr_02 {
     }mode;
 };
 
-/* struct for 0x00 instructions */
+/* struct for group 3 instructions */
 struct instr_03 {
     enum {
         BIT = 1,
@@ -90,13 +90,7 @@ struct instr_cond {
     uint8_t bit;
 };
 
-/* Structure:
- * byte 1 = op-code/addressing mode
- * byte 2 = immediate data or 8-bit memory address (or 1st 8 bits of mem. add.)
- * byte 3 = 2nd 8 bits of 16-bit memory address (used in absolute addressing modes)
- *
- *
- */
+/* takes in 8-bit data to parse for which instruction it is. */
 
 void parse_instruction(uint8_t opcode);
 
