@@ -4,22 +4,22 @@
 
 
 /* executes group 0b01 instructions */
-static void ex_group01(struct instr_01) {
+static void ex_group01(struct instr_01 instruction) {
 
 }
 
 /* executes group 0b10 instructions */
-static void ex_group02(struct instr_02) {
+static void ex_group02(struct instr_02 instruction) {
 
 }
 
 /* executes group 0b00 instructions */
-static void ex_group03(struct instr_03) {
+static void ex_group03(struct instr_03 instruction) {
 
 }
 
 /* executes conditional branches instructions */
-static void ex_cond(struct instr_cond) {
+static void ex_cond(struct instr_cond instruction) {
 
 }
 
