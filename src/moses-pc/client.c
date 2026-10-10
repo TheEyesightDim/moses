@@ -1,8 +1,6 @@
-#include <moses/client.h>
-#include <moses/emu.h>
-#include <SDL3/SDL_events.h>
-#include <SDL3/SDL_timer.h>
-#include <inttypes.h>
+#include <moses/moses.h>
+#include <SDL3/SDL.h>
+#include <stdint.h>
 
 #include "video.h"
 
@@ -22,7 +20,6 @@ void client_init() {
         // determine how many master clock cycles have occurred
         const uint64_t now = SDL_GetPerformanceCounter();
         const uint64_t cycles = (now - start) * (MOSES_MASTER_CLOCK_FREQ) / freq;
-        start = now;
 
         // move forward this many cycles on the emulator
         emu_clock_cycles((uint32_t) cycles);

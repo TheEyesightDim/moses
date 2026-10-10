@@ -1,6 +1,4 @@
-/*
- * Definitions of macros and other utilities (probably)
- */
+/* Definitions of macros and other utilities (probably) */
 
 #pragma once
 

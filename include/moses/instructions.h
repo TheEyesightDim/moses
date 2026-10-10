@@ -2,12 +2,9 @@
 * Defines functions which will be used to perform 6502 commands
  */
 
-
-#ifndef MOSES_COMMANDS_H
-#define MOSES_COMMANDS_H
-
+#pragma once
 /*
- * this struc holds opcodes & addressing modes for group 1 instructions,
+ * this struct holds opcodes & addressing modes for group 1 instructions,
  * and can set the current op/mode using enum members.
  */
 struct instr_01 {
@@ -94,4 +91,3 @@ struct instr_cond {
 
 void parse_instruction(uint8_t opcode);
 
-#endif //MOSES_COMMANDS_H
