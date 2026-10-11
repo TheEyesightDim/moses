@@ -56,6 +56,14 @@ void nes_step_next_instruction();
 // Execute up to, but not including the given instruction address.
 // If the instruction before this address would advance the PC past it
 // (possible if the address is the 2nd byte of a 2-byte instruction),
-// 
+// then the execution will stop just before *that* instruction instead.
+// For example:
+// 			[Inst 1]
+// addr =>	[operand]
+// 			[Inst 2]
+// Becomes:
+// addr =>	[Inst 1]
+// 			[operand]
+// 			[Inst 2]
 void nes_run_to_instruction(reg16 addr);
 

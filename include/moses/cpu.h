@@ -2,8 +2,8 @@
 
 #include <stdint.h>
 
-typedef int8_t reg8;
-typedef int16_t reg16;
+typedef uint8_t reg8;
+typedef uint16_t reg16;
 
 typedef struct CPU {
 	reg16 pc;	// Program counter
