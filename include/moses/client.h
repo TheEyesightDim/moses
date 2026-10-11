@@ -1,8 +1,4 @@
-/*
- * Definitions for client-specific functions. Their implementations are
- * not strictly cross-platform and include functionality like initializing
- * and displaying graphics, logging messages, events, and timing.
- */
+/* Definitions for client-specific functions. */
 
 #pragma once
 

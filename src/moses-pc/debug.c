@@ -1,4 +1,4 @@
-#include <moses/client.h>
+#include <moses/moses.h>
 #include <stdio.h>
 #include <stdarg.h>
 
