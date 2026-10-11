@@ -20,15 +20,6 @@ void emu_clock_cycles(uint32_t cycles);
 #define FLAG_Z (1 << 1)
 #define FLAG_C (1)
 
-struct cpu {
-    uint16_t pc;
-    uint8_t s;
-    uint8_t p;
-    uint8_t a;
-    uint8_t x;
-    uint8_t y;
-};
-
 /* Execute the specified number of CPU cycles.
  * This should be in terms of the CPU clock,
  * which is the master clock divided by 12.
