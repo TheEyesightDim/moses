@@ -9,23 +9,6 @@
 #define LOG_FG_CYAN(str) ("\033[36m"str"\033[0m")
 #define LOG_FG_MAGENTA(str) ("\033[35m"str"\033[0m")
 
-static char const * level_strs[] = {
-    LOG_FG_CYAN("TRACE"),
-    "VERBOSE",
-    "INFO",
-    LOG_FG_YELLOW("WARN"),
-    LOG_FG_RED("ERROR"),
-    LOG_FG_RED("CRITICAL"),
-};
-
-static char const * category_strs[] = {
-    "CPU",
-    "APU",
-    "PPU",
-    "CLIENT",
-    "FILESYSTEM",
-    "GENERAL",
-};
 
 void moses_log(enum MosesLogCategory category,
                enum MosesLogLevel level,
@@ -40,12 +23,12 @@ void moses_log(enum MosesLogCategory category,
     char const * category_name = NULL;
 
     switch (level) {
-        case TRACE: loglevel_name = "TRACE"; break;
+        case TRACE: loglevel_name = LOG_FG_CYAN("TRACE"); break;
         case VERBOSE: loglevel_name = "VERBOSE"; break;
-        case INFO: loglevel_name = "INFO"; break;
-        case WARN: loglevel_name = "WARN"; break;
-        case ERROR: loglevel_name = "ERROR"; break;
-        case CRITICAL: loglevel_name = "CRITICAL"; break;
+        case INFO: loglevel_name = LOG_FG_GREEN("INFO"); break;
+        case WARN: loglevel_name = LOG_FG_YELLOW("WARN"); break;
+        case ERROR: loglevel_name = LOG_FG_RED("ERROR"); break;
+        case CRITICAL: loglevel_name = LOG_FG_RED("CRITICAL"); break;
         default: loglevel_name = "UNKNOWN";
     }
     switch (category) {
