@@ -10,22 +10,22 @@ void client_init();
 
 // Log levels and categories can be adjusted as necessary
 enum MosesLogLevel {
-	TRACE,
-	VERBOSE,
-	INFO,
-	WARN,
-	ERROR,
-	CRITICAL,
+	LEVEL_TRACE,
+	LEVEL_VERBOSE,
+	LEVEL_INFO,
+	LEVEL_WARN,
+	LEVEL_ERROR,
+	LEVEL_CRITICAL,
 };
 
 // Categories can be combined via bitwise OR for filtering
 enum MosesLogCategory {
-	CPU 		= 1,
-	APU 		= 1 << 1,
-	PPU 		= 1 << 2,
-	CLIENT		= 1 << 3,
-	FILESYSTEM	= 1 << 4,
-	GENERAL		= 1 << 5,
+	CAT_CPU 		= 1,
+	CAT_APU 		= 1 << 1,
+	CAT_PPU 		= 1 << 2,
+	CAT_CLIENT		= 1 << 3,
+	CAT_FILESYSTEM	= 1 << 4,
+	CAT_GENERAL		= 1 << 5,
 };
 
 // VT100 Terminal colors

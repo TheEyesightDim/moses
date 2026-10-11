@@ -1,6 +1,6 @@
 #include <moses/moses.h>
 #include <stdint.h>
 
-void emu_clock_cycles(uint32_t cycles) {
+void nes_emulate_next_frame() {
 
 }

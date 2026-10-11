@@ -1,13 +1,15 @@
-/*
-* Defines functions which will be used to perform 6502 commands
- */
-
 #pragma once
+/*
+* Defines functions which will be used to perform 6502 instructions
+*/
+
+#include <stdint.h>
+
 /*
  * this struct holds opcodes & addressing modes for group 1 instructions,
  * and can set the current op/mode using enum members.
  */
-struct instr_01 {
+typedef struct {
     enum {
         ORA,
         AND,
@@ -29,10 +31,10 @@ struct instr_01 {
         G1_ABSOLUTE_Y,
         G1_ABSOLUTE_X
     }mode;
-};
+} Instr01;
 
 /* similarly, a struct for group 2 instructions */
-struct instr_02 {
+typedef struct {
     enum {
         ASL,
         ROL,
@@ -52,10 +54,10 @@ struct instr_02 {
         G2_ZERO_PAGE_X = 5,
         G2_ABSOLUTE_X = 7
     }mode;
-};
+} Instr02;
 
 /* struct for group 3 instructions */
-struct instr_03 {
+typedef struct {
     enum {
         BIT = 1,
         JMP,
@@ -73,10 +75,10 @@ struct instr_03 {
         G3_ZERO_PAGE_X = 5,
         G3_ABSOLUTE_X = 7
     }mode;
-};
+} Instr03;
 
 /* struct for conditional instructions, which use status register data */
-struct instr_cond {
+typedef struct {
     enum {
         NEGATIVE,
         OVERFLOW,
@@ -85,9 +87,8 @@ struct instr_cond {
     }flag;
 
     uint8_t bit;
-};
+} InstrCond;
 
 /* takes in 8-bit data to parse for which instruction it is. */
-
 void parse_instruction(uint8_t opcode);
 
