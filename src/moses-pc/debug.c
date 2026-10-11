@@ -2,13 +2,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-// VT100 Terminal colors
-#define LOG_FG_YELLOW(str) ("\033[33m"str"\033[0m")
-#define LOG_FG_RED(str) ("\033[31m"str"\033[0m")
-#define LOG_FG_GREEN(str) ("\033[32m"str"\033[0m")
-#define LOG_FG_CYAN(str) ("\033[36m"str"\033[0m")
-#define LOG_FG_MAGENTA(str) ("\033[35m"str"\033[0m")
-
 
 void moses_log(enum MosesLogCategory category,
                enum MosesLogLevel level,
