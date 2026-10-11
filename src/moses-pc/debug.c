@@ -63,17 +63,3 @@ void moses_log(enum MosesLogCategory category,
 
     fprintf(stderr, "\n");
 }
-
-void moses_set_log_threshold(enum MosesLogLevel level) {
-    threshold = level;
-}
-
-void moses_set_log_categories(int categories) {
-    log_categories |= categories;
-}
-
-void moses_unset_log_categories(int categories) {
-    // clear all the bits that are set in categories, but leave the rest
-    log_categories &= ~categories;
-}
-

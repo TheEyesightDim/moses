@@ -41,13 +41,6 @@ void moses_log(enum MosesLogCategory category,
                char const * fmt, ...)
 __attribute__ ((format (printf, 3, 4)));
 
-// Set a log level threshhold, below which log messages are ignored.
-void moses_set_log_threshold(enum MosesLogLevel level);
-
-// Set and unset log categories to filter.
-void moses_set_log_categories(int categories);
-void moses_unset_log_categories(int categories);
-
 /* Video */
 void init_video();
 void exit_video();
