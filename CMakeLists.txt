@@ -9,20 +9,15 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 
 add_compile_definitions(MOSES_VER="${CMAKE_PROJECT_VERSION}")
 
-# Add emulator core executable
+# Add emulator core
 add_subdirectory(src/emu)
 
-# Add and link moses-client based on platform
+# Add moses client based on platform
 if(CLIENT_PLATFORM STREQUAL "sdl3")
     add_subdirectory(src/moses-pc)
 else()
     message(WARNING "specified client not recognized")
 endif()
-
-target_link_libraries(moses
-        PRIVATE
-        moses-client
-)
 
 # Add tests
 enable_testing()

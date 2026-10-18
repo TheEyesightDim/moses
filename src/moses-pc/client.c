@@ -16,7 +16,8 @@ static void render_sample(SDLContext* ctx) {
     }
 }
 
-void client_init() {
+int main(int argc, char* argv[]) {
+
     // initialize subsystems
     init_video();
 
@@ -61,5 +62,6 @@ void client_init() {
     }
     // cleanup
     exit_video();
+    return 0;
 }
 

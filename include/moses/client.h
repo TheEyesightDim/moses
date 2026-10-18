@@ -2,10 +2,6 @@
 
 #pragma once
 
-// Client entrypoint
-void client_init();
-
-
 /* Logging */
 
 // Log levels and categories can be adjusted as necessary

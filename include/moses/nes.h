@@ -28,11 +28,11 @@ typedef struct NES {
 	uint64_t master_ticks_elapsed;
 } NES;
 
-// Allocates an NES struct, performs a system reset on it, and returns a pointer to the struct.
+// Initialize an NES struct, performs a system reset on it, and returns a pointer to the struct.
 // If provided a non-NULL pointer to a MapperBase-compatible structure,
 // the system will be initialized with that mapper.
 // Otherwise, the will be initialized to an 'open bus'/empty cartridge state.
-NES * nes_create(MapperBase * mapper);
+NES * nes_init(NES * nes, MapperBase * mapper);
 
 void nes_delete(NES * nes);
 
