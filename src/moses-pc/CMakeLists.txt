@@ -3,7 +3,7 @@ project(moses-pc C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_library(moses-client STATIC)
+add_executable(moses)
 
 # Link SDL3
 option(SDL_VENDORED "Use vendored SDL3" ON)
@@ -12,19 +12,18 @@ if(SDL_VENDORED)
 else()
     find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
 endif()
-target_link_libraries(moses-client
+target_link_libraries(moses
         PRIVATE
         SDL3::SDL3
+        moses-core
 )
 
-
-
-target_include_directories(moses-client
+target_include_directories(moses
         PUBLIC
         "${CMAKE_SOURCE_DIR}/include"
         ./external/SDL/include
 )
-target_sources(moses-client
+target_sources(moses
         PRIVATE
         debug.c
         video.c

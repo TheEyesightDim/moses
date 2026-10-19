@@ -4,22 +4,22 @@
 
 
 /* executes group 0b01 instructions */
-static void ex_group01(struct instr_01 instruction) {
+static void ex_group01(Instr01 instruction) {
 
 }
 
 /* executes group 0b10 instructions */
-static void ex_group02(struct instr_02 instruction) {
+static void ex_group02(Instr02 instruction) {
 
 }
 
 /* executes group 0b00 instructions */
-static void ex_group03(struct instr_03 instruction) {
+static void ex_group03(Instr03 instruction) {
 
 }
 
 /* executes conditional branches instructions */
-static void ex_cond(struct instr_cond instruction) {
+static void ex_cond(InstrCond instruction) {
 
 }
 
@@ -48,29 +48,28 @@ void parse_instruction(uint8_t opcode){
     uint8_t group = EXT(opcode, 0, 2);
 
     if (group == 1) {
-        struct instr_01 instruction;
+        Instr01 instruction;
         instruction.op = EXT(opcode, 5, 3);
         instruction.mode = EXT(opcode, 2, 3);
         ex_group01(instruction);
 
     } else if (group == 2) {
-        struct instr_02 instruction;
+        Instr02 instruction;
         instruction.op = EXT(opcode, 5, 3);
         instruction.mode = EXT(opcode, 2, 3);
         ex_group02(instruction);
 
     } else if (group == 0) {
-        struct instr_03 instruction;
+        Instr03 instruction;
         instruction.op = EXT(opcode, 5, 3);
         instruction.mode = EXT(opcode, 2, 3);
         ex_group03(instruction);
 
     } else if (EXT(opcode,0,5) == 16) {
-        struct instr_cond instruction;
+        InstrCond instruction;
         instruction.flag = EXT(opcode, 6, 2);
         instruction.bit = BIT(opcode, 5);
         ex_cond(instruction);
-
     } else {
         ex_unformatted(opcode);
     }
