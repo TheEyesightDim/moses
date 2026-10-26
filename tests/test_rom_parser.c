@@ -30,28 +30,48 @@ static uint8_t const header_smb3[16] = {
 	0x00, 0x00, 0x00, 0x01
 };
 
-static RomDescriptor const expected_dk_header = {
+// These structs are static global to ensure their zero-initialization,
+// for the sake of easy memcmp comparison.
+
+static RomDescriptor const expected_dk = {
 	.mapper_id = 0,
-	.uses_horizontal_nametable = true,
+	.hardwired_vertical_mirroring = false,
 	.timing_mode = RD_TIMING_NTSC,
 	.console_type = RD_CONSOLE_NES,
 	.prg_rom_size = 16384,
 	.chr_rom_size = 8192,
+	// Even though the actual cart has no PRG RAM, the header must be interpreted as implying it
+	.prg_ram_size = 8192 
 };
 
-static void test_parsing_ines_header(RomDescriptor const * expected) {
+static RomDescriptor const expected_smb3 = {
+	.mapper_id = 4,
+	.hardwired_vertical_mirroring = false,
+	.timing_mode = RD_TIMING_NTSC,
+	.console_type = RD_CONSOLE_NES,
+	.prg_rom_size = 0x10 * 16384,
+	.chr_rom_size = 0x10 * 8192,
+	.prg_ram_size = 8192,
+	.default_device = RD_STANDARD_CONTROLLERS
+};
+
+static void test_parsing_header(uint8_t const header[16], RomDescriptor const * expected) {
 	RomDescriptor test_descriptor;
-	int result = make_rom_descriptor(&test_descriptor, header_dk);
+	int result = make_rom_descriptor(&test_descriptor, header);
 
-	TEST_ASSERT("iNes ROM parses successfully", result == 0);
+	TEST_ASSERT("ROM parses successfully", result == 0);
 
-	bool matched = memcmp(expected, &test_descriptor, sizeof(RomDescriptor));
+	// We can use memcmp because make_rom_descriptor zeroes the
+	// descriptor's memory first, so the padding bytes will be zero.
+	bool matched = !memcmp(expected, &test_descriptor, sizeof(RomDescriptor));
 	TEST_ASSERT("RomDescriptor has expected data", matched);
 }
 
 int main() {
 	printf("Testing \"Donkey Kong\" (1981) header...\n");
-	test_parsing_ines_header(&expected_dk_header);
+	test_parsing_header(header_dk, &expected_dk);
+	printf("Testing \"Super Mario Bros. 3\" (1988) header...\n");
+	test_parsing_header(header_smb3, &expected_smb3);
 	return 0;
 }
 
