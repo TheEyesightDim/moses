@@ -41,7 +41,7 @@ static RomDescriptor const expected_dk_header = {
 
 static void test_parsing_ines_header(RomDescriptor const * expected) {
 	RomDescriptor test_descriptor;
-	int result = make_rom_descriptor(&test_descriptor, rom_bytes);
+	int result = make_rom_descriptor(&test_descriptor, header_dk);
 
 	TEST_ASSERT("iNes ROM parses successfully", result == 0);
 
