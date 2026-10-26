@@ -56,6 +56,6 @@ typedef struct RomDescriptor {
 
 // Initialize a RomDescriptor from a buffer holding raw NES rom data.
 // Returns 0 on success, non-zero on error.
-int make_rom_descriptor(RomDescriptor * romdesc, void const * buffer);
+int init_rom_descriptor(RomDescriptor * romdesc, void const * buffer);
 
 

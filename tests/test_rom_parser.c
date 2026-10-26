@@ -57,7 +57,7 @@ static RomDescriptor const expected_smb3 = {
 
 static void test_parsing_header(uint8_t const header[16], RomDescriptor const * expected) {
 	RomDescriptor test_descriptor;
-	int result = make_rom_descriptor(&test_descriptor, header);
+	int result = init_rom_descriptor(&test_descriptor, header);
 
 	TEST_ASSERT("ROM parses successfully", result == 0);
 

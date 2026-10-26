@@ -9,7 +9,7 @@
 static int parse_nes2_header(RomDescriptor * romdesc, const uint8_t header[16]);
 static int parse_ines_header(RomDescriptor * romdesc, const uint8_t header[16]);
 
-int make_rom_descriptor(RomDescriptor * romdesc, void const * buffer) {
+int init_rom_descriptor(RomDescriptor * romdesc, void const * buffer) {
 	uint8_t const * header = buffer;
 
 	// Magic string for iNes and NES 2.0 headers
