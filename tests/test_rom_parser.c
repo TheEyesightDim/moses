@@ -59,12 +59,12 @@ static void test_parsing_header(uint8_t const header[16], RomDescriptor const * 
 	RomDescriptor test_descriptor;
 	int result = init_rom_descriptor(&test_descriptor, header);
 
-	TEST_ASSERT("ROM parses successfully", result == 0);
+	TEST_ASSERT("\tROM parses successfully", result == 0);
 
 	// We can use memcmp because make_rom_descriptor zeroes the
 	// descriptor's memory first, so the padding bytes will be zero.
 	bool matched = !memcmp(expected, &test_descriptor, sizeof(RomDescriptor));
-	TEST_ASSERT("RomDescriptor has expected data", matched);
+	TEST_ASSERT("\tRomDescriptor has expected data", matched);
 }
 
 int main() {

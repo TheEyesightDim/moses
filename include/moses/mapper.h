@@ -17,7 +17,6 @@
 
 #include "moses/rom_parser.h"
 #include <stdint.h>
-#include <stdio.h>
 
 enum MapperID {
 	MAPPER_NROM,
