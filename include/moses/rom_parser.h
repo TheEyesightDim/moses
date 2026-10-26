@@ -32,6 +32,11 @@ typedef struct RomDescriptor {
 	enum RDTimingMode timing_mode;
 	enum RDConsoleType console_type;
 
+	bool uses_horizontal_nametable;
+	bool uses_alternative_nametable;
+	bool has_persistent_memory;
+	bool has_trainer_data;
+
 	int prg_rom_size;
 	int chr_rom_size;
 	int prg_ram_size;
@@ -42,6 +47,6 @@ typedef struct RomDescriptor {
 
 // Initialize a RomDescriptor from a buffer holding raw NES rom data.
 // Returns 0 on success, non-zero on error.
-int rom_descriptor_from_buffer(RomDescriptor * romdesc, void const * buffer);
+int make_rom_descriptor(RomDescriptor * romdesc, void const * buffer);
 
 

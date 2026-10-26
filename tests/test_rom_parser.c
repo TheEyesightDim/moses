@@ -1,63 +1,58 @@
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
+#include <stdio.h>
 
-#include "rom_parser.h"
+#include "moses/rom_parser.h"
+#include "test_utils.h"
 
 /*	The data from a NES 2.0 ROM header should be correctly parsed and loaded into the RomDescriptor struct. As feature support improves, more fields should be correctly parsed and tested, but this covers the basic information (mapper type, console timing, description of memory banks).
 */
 
-uint8_t const rom_bytes[] = {
-	/* 	Either define the bytes inline (painful),
-		or generate them programmatically into a rom,
-		then use:
-		`#embed "../res/test_roms/file"` inside a const array.
-	*/
+//	This is the iNes format .nes header from Donkey Kong (1981).
+//	sha1:c4eb14a59b853a58f53538e07c5efac56ddfe5fe
+//	It contains no proprietary game data, only the header.
+static uint8_t const header_dk[16] = {
+	0x4e, 0x45, 0x53, 0x1a,
+	0x01, 0x01, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x61,
+	0x73, 0x74, 0x65, 0x72
 };
 
-static bool compare_rom_descriptors(RomDescriptor const * first,
-                                    RomDescriptor const * second);
+// This is the NES 2.0 format .nes header from Super Mario Bros. 3 (1988).
+// sha1:a25d2dcbf6ec3634a84318bfe2cfe28d5331d815
+// It contains no proprietary game data, only the header.
+static uint8_t const header_smb3[16] = {
+	0x4e, 0x45, 0x53, 0x1a,
+	0x10, 0x10, 0x40, 0x08,
+	0x00, 0x00, 0x07, 0x00,
+	0x00, 0x00, 0x00, 0x01
+};
 
-static void test_parsing_nes2_header_basic() {
+static RomDescriptor const expected_dk_header = {
+	.mapper_id = 0,
+	.uses_horizontal_nametable = true,
+	.timing_mode = RD_TIMING_NTSC,
+	.console_type = RD_CONSOLE_NES,
+	.prg_rom_size = 16384,
+	.chr_rom_size = 8192,
+};
 
-	// The values are chosen here arbitrarily and not meant to correspond to the header of any real cartridge.
-	RomDescriptor expected = {
-		.mapper_id = 7,
-		.submapper_id = 7,
-
-		.timing_mode = RD_TIMING_NTSC,
-		.console_type = RD_CONSOLE_NES,
-		.prg_rom_size = 16384,
-		.chr_rom_size = 8192,
-		.prg_ram_size = 8192,
-		.eeprom_size = 8192,
-		.chr_ram_size = 0,
-		.chr_nvram_size = 0,
-	};
-
+static void test_parsing_ines_header(RomDescriptor const * expected) {
 	RomDescriptor test_descriptor;
-	int result = rom_descriptor_from_buffer(&test_descriptor, rom_bytes);
+	int result = make_rom_descriptor(&test_descriptor, rom_bytes);
 
-	assert(result == 0);
-	assert(compare_rom_descriptors(&test_descriptor, &expected));
+	TEST_ASSERT("iNes ROM parses successfully", result == 0);
+
+	bool matched = memcmp(expected, &test_descriptor, sizeof(RomDescriptor));
+	TEST_ASSERT("RomDescriptor has expected data", matched);
 }
 
 int main() {
-	test_parsing_nes2_header_basic();
+	printf("Testing \"Donkey Kong\" (1981) header...\n");
+	test_parsing_ines_header(&expected_dk_header);
 	return 0;
 }
 
-static bool compare_rom_descriptors(RomDescriptor const * first,
-                                    RomDescriptor const * second) {
-	return
-	first-> mapper_id == second->mapper_id
-	&& first->submapper_id == second->submapper_id
-	&& first->timing_mode == second->timing_mode
-	&& first->console_type == second->console_type
-	&& first->prg_rom_size == second->prg_rom_size
-	&& first->chr_rom_size == second->chr_rom_size
-	&& first->prg_ram_size == second->prg_ram_size
-	&& first->eeprom_size == second->eeprom_size
-	&& first->chr_ram_size == second->chr_ram_size
-	&& first->chr_nvram_size == second->chr_nvram_size;
-}
+
